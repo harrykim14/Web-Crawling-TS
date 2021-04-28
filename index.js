@@ -38,9 +38,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 var puppeteer = require("puppeteer");
 var fs = require("fs");
-var iPhone = puppeteer.devices['iPhone X'];
 (function () { return __awaiter(void 0, void 0, void 0, function () {
-    var browser, page, data, evalData;
+    var browser, page, dataAll, evalData, today;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, puppeteer.launch()];
@@ -49,31 +48,31 @@ var iPhone = puppeteer.devices['iPhone X'];
                 return [4 /*yield*/, browser.newPage()];
             case 2:
                 page = _a.sent();
-                return [4 /*yield*/, page.emulate(iPhone)];
+                return [4 /*yield*/, page.goto("https://www.asahi.co.jp/ohaasa/week/horoscope/", {
+                        waitUntil: "networkidle2"
+                    })];
             case 3:
                 _a.sent();
-                return [4 /*yield*/, page.goto('https://www.asahi.co.jp/ohaasa/week/horoscope/', {
-                        waitUntil: 'networkidle2'
-                    })];
+                return [4 /*yield*/, page.$("body > div.wrap > div > div.wrap_column > article")];
             case 4:
-                _a.sent();
-                return [4 /*yield*/, page.$('body > div.wrap > div > div.wrap_column > article')];
-            case 5:
-                data = _a.sent();
+                dataAll = _a.sent();
                 return [4 /*yield*/, page.evaluate(function (element) {
                         return element.textContent;
-                    }, data)];
-            case 6:
+                    }, dataAll)];
+            case 5:
                 evalData = _a.sent();
-                if (!fs.existsSync('/ohaasa')) {
-                    fs.mkdirSync('/ohaasa');
+                if (!fs.existsSync("/ohaasa")) {
+                    fs.mkdirSync("/ohaasa");
                 }
-                fs.writeFileSync("./ohaasa/ohaasa" + new Date().getTime() + ".txt", evalData, { encoding: 'utf8' });
-                return [4 /*yield*/, page.pdf({ path: "./ohaasa/ohaasa" + new Date().getTime() + ".pdf", format: 'a4' })];
-            case 7:
+                today = "" + new Date().getFullYear() + (new Date().getMonth() + 1) + new Date().getDate();
+                fs.writeFileSync("./ohaasa/ohaasa" + today + ".txt", evalData, {
+                    encoding: "utf8"
+                });
+                return [4 /*yield*/, page.pdf({ path: "./ohaasa/ohaasa" + today + ".pdf", format: "a4" })];
+            case 6:
                 _a.sent();
                 return [4 /*yield*/, browser.close()];
-            case 8:
+            case 7:
                 _a.sent();
                 return [2 /*return*/];
         }
