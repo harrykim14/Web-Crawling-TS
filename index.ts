@@ -1,7 +1,7 @@
 import * as puppeteer from "puppeteer";
 import * as fs from "fs";
 
-(async () => {
+export const crwalingOhaasa = async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto("https://www.asahi.co.jp/ohaasa/week/horoscope/", {
@@ -29,4 +29,7 @@ import * as fs from "fs";
   await page.pdf({ path: `./ohaasa/ohaasa${today}.pdf`, format: "a4" });
 
   await browser.close();
-})();
+  await console.log("Crawl completed!");
+};
+
+crwalingOhaasa();

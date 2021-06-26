@@ -36,9 +36,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
+exports.crwalingOhaasa = void 0;
 var puppeteer = require("puppeteer");
 var fs = require("fs");
-(function () { return __awaiter(void 0, void 0, void 0, function () {
+var crwalingOhaasa = function () { return __awaiter(void 0, void 0, void 0, function () {
     var browser, page, dataAll, evalData, today;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -74,7 +75,12 @@ var fs = require("fs");
                 return [4 /*yield*/, browser.close()];
             case 7:
                 _a.sent();
+                return [4 /*yield*/, console.log("Crawl completed!")];
+            case 8:
+                _a.sent();
                 return [2 /*return*/];
         }
     });
-}); })();
+}); };
+exports.crwalingOhaasa = crwalingOhaasa;
+exports.crwalingOhaasa();
