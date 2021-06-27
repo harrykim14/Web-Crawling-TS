@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     name: ohayou-asadesu
-    runs-on: window-latest
+    runs-on: windows-latest
 
     strategy:
       matrix:
