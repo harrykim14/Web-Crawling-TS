@@ -25,6 +25,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: 폴더 권한 보기
         run: ls -l
+      - name: 폴더 권한 풀기
+        run: chmod 777 ohaasa
+      - name: 폴더 권한 다시 보기
+        run: ls -l
 #       - name: npm ci를 사용하여 puppeteer를 설치
 #         run: npm ci
 #       - name: node 명령어로 스크롤링하기
