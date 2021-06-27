@@ -18,17 +18,30 @@ export const crwalingOhaasa = async () => {
     new Date().getMonth() + 1
   }${new Date().getDate()}`;
 
-  try {
-    if (!fs.existsSync("/ohaasa")) {
-      fs.mkdirSync("/ohaasa");
-    }
+  // try {
+  //   if (!fs.existsSync("/ohaasa")) {
+  //     fs.mkdirSync("/ohaasa");
+  //   }
 
-    fs.writeFileSync(`./ohaasa/ohaasa${today}.txt`, evalData, {
-      encoding: "utf8",
-    });
-  } catch {
-    console.log("Error at mkdirSync or writeFileSync function");
-  }
+  //   fs.writeFileSync(`./ohaasa/ohaasa${today}.txt`, evalData, {
+  //     encoding: "utf8",
+  //   });
+  // } catch {
+  //   console.log("Error at mkdirSync or writeFileSync function");
+  // }
+
+  // console.log(
+  //   evalData
+  //     .replace(/  /gi, "") // 빈공간 삭제
+  //     .replace(/\t/gi, "") // 탭
+  //     .split("\n") // 엔터를 구분자로 나누기
+  //     .filter((item) => item !== "")
+  // );
+  fs.writeFile(`./ohaasa/ohaasa${today}.txt`, evalData, "utf-8", (err) => {
+    if (err) {
+      console.log(err);
+    }
+  });
 
   await page.pdf({ path: `./ohaasa/ohaasa${today}.pdf`, format: "a4" });
 

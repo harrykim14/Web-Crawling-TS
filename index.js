@@ -63,17 +63,28 @@ var crwalingOhaasa = function () { return __awaiter(void 0, void 0, void 0, func
             case 5:
                 evalData = _a.sent();
                 today = "" + new Date().getFullYear() + (new Date().getMonth() + 1) + new Date().getDate();
-                try {
-                    if (!fs.existsSync("/ohaasa")) {
-                        fs.mkdirSync("/ohaasa");
+                // try {
+                //   if (!fs.existsSync("/ohaasa")) {
+                //     fs.mkdirSync("/ohaasa");
+                //   }
+                //   fs.writeFileSync(`./ohaasa/ohaasa${today}.txt`, evalData, {
+                //     encoding: "utf8",
+                //   });
+                // } catch {
+                //   console.log("Error at mkdirSync or writeFileSync function");
+                // }
+                // console.log(
+                //   evalData
+                //     .replace(/  /gi, "") // 빈공간 삭제
+                //     .replace(/\t/gi, "") // 탭
+                //     .split("\n") // 엔터를 구분자로 나누기
+                //     .filter((item) => item !== "")
+                // );
+                fs.writeFile("./ohaasa/ohaasa" + today + ".txt", evalData, "utf-8", function (err) {
+                    if (err) {
+                        console.log(err);
                     }
-                    fs.writeFileSync("./ohaasa/ohaasa" + today + ".txt", evalData, {
-                        encoding: "utf8"
-                    });
-                }
-                catch (_b) {
-                    console.log("Error at mkdirSync or writeFileSync function");
-                }
+                });
                 return [4 /*yield*/, page.pdf({ path: "./ohaasa/ohaasa" + today + ".pdf", format: "a4" })];
             case 6:
                 _a.sent();
