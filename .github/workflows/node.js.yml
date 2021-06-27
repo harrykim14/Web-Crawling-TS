@@ -33,9 +33,8 @@ jobs:
         run:
           git config --local user.email "harrykim14@korea.ac.kr" |
           git config --local user.name "harrykim14" |
-          git status | 
           git add . |
-          del .git\index.lock |
+          rm -f .git/index.lock |
           git commit -m "Run Crawler and Update current data" -a
       - name: 저장소에 푸쉬하기
         uses: ad-m/github-push-action@master
