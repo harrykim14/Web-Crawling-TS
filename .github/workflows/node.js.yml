@@ -25,7 +25,19 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - run: npm install puppeteer
-      - run: ls -al
-    # - run: node index.js
+      - name: npm ci를 사용하여 puppeter를 설치
+        run: npm ci
+      - name: node 명령어로 스크롤링하기
+        run: node index.js
+      - name: 생성한 커밋하기
+        run:
+          git config --local user.email "harrykim14@korea.ac.kr" |
+          git config --local user.name "harrykim14" |
+          git add . |
+          rm -f ./.git/index.lock |
+          git commit -m "Run Crawler and Update current data" -a
+      - name: 저장소에 푸쉬하기
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
