@@ -29,23 +29,23 @@ jobs:
         run: chmod 777 ohaasa
       - name: 폴더 권한 다시 보기
         run: ls -l
-#       - name: npm ci를 사용하여 puppeteer를 설치
-#         run: npm ci
-#       - name: node 명령어로 스크롤링하기
-#         run: node index.js
-#       - name: 스크롤링해서 저장한 txt 파일 git add 하기
-#         run:
-#           git config --local user.email "harrykim14@korea.ac.kr" |
-#           git config --local user.name "harrykim14" |
-#           git add . 
-#       - name: 파일 출력하기
-#         run: ls
-#       - name: 깃헙 index.lock 파일 지우기
-#         run: rm -f ./github/index.lock
-#       - name: 커밋을 완료하기
-#         run: git commit -m "Run Crawler and Update current data" -a
-#       - name: 저장소에 푸쉬하기
-#         uses: ad-m/github-push-action@master
-#         with:
-#           github_token: ${{ secrets.GITHUB_TOKEN }}
-#           branch: ${{ github.ref }}
+      - name: npm ci를 사용하여 puppeteer를 설치
+        run: npm ci
+      - name: node 명령어로 스크롤링하기
+        run: node index.js
+      - name: 스크롤링해서 저장한 txt 파일 git add 하기
+        run:
+          git config --local user.email "harrykim14@korea.ac.kr" |
+          git config --local user.name "harrykim14" |
+          git add . 
+      - name: 파일 출력하기
+        run: ls
+      - name: 깃헙 index.lock 파일 지우기
+        run: rm -f ./.git/index.lock
+      - name: 커밋을 완료하기
+        run: git commit -m "Run Crawler and Update current data" -a
+      - name: 저장소에 푸쉬하기
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
