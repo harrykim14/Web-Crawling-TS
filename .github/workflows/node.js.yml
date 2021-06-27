@@ -27,6 +27,8 @@ jobs:
         run: npm ci
       - name: node 명령어로 스크롤링하기
         run: node index.js
+      - name: 파일 출력하기
+        run: ls
       - name: 스크롤링해서 저장한 txt 파일 커밋하기
         run:
           git config --local user.email "harrykim14@korea.ac.kr" |
