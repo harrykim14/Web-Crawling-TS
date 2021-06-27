@@ -31,6 +31,7 @@ jobs:
         run:
           git config --local user.email "harrykim14@korea.ac.kr" |
           git config --local user.name "harrykim14" |
+          git status | 
           git add . |
           rm -f ./.git/index.lock |
           git commit -m "Run Crawler and Update current data" -a
