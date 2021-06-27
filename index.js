@@ -62,13 +62,18 @@ var crwalingOhaasa = function () { return __awaiter(void 0, void 0, void 0, func
                     }, dataAll)];
             case 5:
                 evalData = _a.sent();
-                if (!fs.existsSync("/ohaasa")) {
-                    fs.mkdirSync("/ohaasa");
-                }
                 today = "" + new Date().getFullYear() + (new Date().getMonth() + 1) + new Date().getDate();
-                fs.writeFileSync("./ohaasa/ohaasa" + today + ".txt", evalData, {
-                    encoding: "utf8"
-                });
+                try {
+                    if (!fs.existsSync("/ohaasa")) {
+                        fs.mkdirSync("/ohaasa");
+                    }
+                    fs.writeFileSync("./ohaasa/ohaasa" + today + ".txt", evalData, {
+                        encoding: "utf8"
+                    });
+                }
+                catch (_b) {
+                    console.log("Error at mkdirSync or writeFileSync function");
+                }
                 return [4 /*yield*/, page.pdf({ path: "./ohaasa/ohaasa" + today + ".pdf", format: "a4" })];
             case 6:
                 _a.sent();

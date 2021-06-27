@@ -14,17 +14,21 @@ export const crwalingOhaasa = async () => {
     return element.textContent;
   }, dataAll);
 
-  if (!fs.existsSync("/ohaasa")) {
-    fs.mkdirSync("/ohaasa");
-  }
-
   let today = `${new Date().getFullYear()}${
     new Date().getMonth() + 1
   }${new Date().getDate()}`;
 
-  fs.writeFileSync(`./ohaasa/ohaasa${today}.txt`, evalData, {
-    encoding: "utf8",
-  });
+  try {
+    if (!fs.existsSync("/ohaasa")) {
+      fs.mkdirSync("/ohaasa");
+    }
+
+    fs.writeFileSync(`./ohaasa/ohaasa${today}.txt`, evalData, {
+      encoding: "utf8",
+    });
+  } catch {
+    console.log("Error at mkdirSync or writeFileSync function");
+  }
 
   await page.pdf({ path: `./ohaasa/ohaasa${today}.pdf`, format: "a4" });
 
