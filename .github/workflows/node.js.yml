@@ -37,8 +37,8 @@ jobs:
         run: node index.js --unhandled-rejections=strict
       - name: 스크롤링해서 저장한 파일 푸쉬하기
         run:
-          git config --local user.email "harrykim14@korea.ac.kr" |
-          git config --local user.name "harrykim14" |
+          git config --global user.email "harrykim14@korea.ac.kr" |
+          git config --global user.name "harrykim14" |
           git add . |
           rm -f ./.git/index.lock |
           git commit -m "Run Crawler and Update current data" -a
