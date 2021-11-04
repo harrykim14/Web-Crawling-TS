@@ -1,3 +1,5 @@
 # module package
-node_modules
-archive
+/node_modules
+
+# archive
+/ohaasa
