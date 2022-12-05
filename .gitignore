@@ -1,5 +1,8 @@
 # module package
-/node_modules
+node_modules
 
 # archive
-/ohaasa
+# ohaasa
+
+# github Action file
+.github
