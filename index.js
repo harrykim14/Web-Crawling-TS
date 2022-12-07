@@ -1,23 +1,4 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -54,12 +35,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.crawlingOhaasa = void 0;
-var puppeteer = __importStar(require("puppeteer"));
-var fs = __importStar(require("fs"));
+var puppeteer = require("puppeteer");
+var fs = require("fs");
 var crawlingOhaasa = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var browser, page, dataAll, evalData, today;
+    var browser, page, Selector, dataAll, evalData, today;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, puppeteer.launch()];
@@ -69,32 +50,29 @@ var crawlingOhaasa = function () { return __awaiter(void 0, void 0, void 0, func
             case 2:
                 page = _a.sent();
                 return [4 /*yield*/, page.goto("https://www.asahi.co.jp/ohaasa/week/horoscope/", {
-                        waitUntil: "networkidle2",
+                        waitUntil: "networkidle2"
                     })];
             case 3:
                 _a.sent();
-                return [4 /*yield*/, page.$("body > div.wrap > div > div.wrap_column > article")];
+                Selector = "body > div.wrap > div > div.wrap_column > article";
+                return [4 /*yield*/, page.$(Selector)];
             case 4:
                 dataAll = _a.sent();
-                return [4 /*yield*/, page.evaluate(function (element) {
-                        return element.textContent;
-                    }, dataAll)];
+                return [4 /*yield*/, page.evaluate(function (element) { return element.textContent; }, dataAll)];
             case 5:
                 evalData = _a.sent();
                 today = todayis();
-                fs.writeFile("./ohaasa/ohaasa" + today + ".txt", evalData, "utf-8", function (err) {
-                    if (err) {
-                        console.log(err);
-                    }
-                });
-                return [4 /*yield*/, page.pdf({ path: "./ohaasa/ohaasa" + today + ".pdf", format: "a4" })];
+                return [4 /*yield*/, data2file(today, evalData)];
             case 6:
                 _a.sent();
-                return [4 /*yield*/, browser.close()];
+                return [4 /*yield*/, page.pdf({ path: "./ohaasa/ohaasa" + today + ".pdf", format: "a4" })];
             case 7:
                 _a.sent();
-                return [4 /*yield*/, console.log("Crawl completed!")];
+                return [4 /*yield*/, browser.close()];
             case 8:
+                _a.sent();
+                return [4 /*yield*/, console.log("Crawl completed!")];
+            case 9:
                 _a.sent();
                 return [2 /*return*/];
         }
@@ -109,5 +87,11 @@ var todayis = function () {
     var result = "" + year + (month < 10 ? "0" + month : month) + (day < 10 ? "0" + day : day);
     return result;
 };
+var data2file = function (today, evalData) {
+    fs.writeFile("./ohaasa/ohaasa" + today + ".txt", evalData, "utf-8", function (err) {
+        if (err) {
+            console.log(err);
+        }
+    });
+};
 exports.crawlingOhaasa();
-//# sourceMappingURL=index.js.map
